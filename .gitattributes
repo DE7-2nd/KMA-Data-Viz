@@ -1,0 +1,1 @@
+src/data/wind/raw_data/sfc_tm2.zip filter=lfs diff=lfs merge=lfs -text
