@@ -66,7 +66,8 @@ if __name__ == "__main__":
 
     # 저장
     extractor.save_to_csv(
-        location_df, "../../data/common/observation_location.csv"
+        location_df,
+        "../../data/common/processed_data/observation_location.csv",
     )
     print(f"저장 완료: {len(location_df)}개 관측소")
     print(location_df.head())

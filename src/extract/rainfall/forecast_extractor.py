@@ -46,9 +46,11 @@ class ForecastExtractor:
     def __init__(self, api_key: Optional[str] = None):
         self.api_client = JsonAPIClient(api_key)
         self.input_file = (
-            f"{PROJECT_ROOT}/src/extract/rainfall/forecast_2025.csv"
+            f"{PROJECT_ROOT}/src/data/rainfall/raw_data/forecast_2025.csv"
         )
-        self.output_file = f"{PROJECT_ROOT}/src/data/rainfall/forecast.csv"
+        self.output_file = (
+            f"{PROJECT_ROOT}/src/data/rainfall/processed_data/forecast.csv"
+        )
 
     def load_forecast_data(self) -> pd.DataFrame:
         """예보 데이터 로드 (EUC-KR 인코딩)"""

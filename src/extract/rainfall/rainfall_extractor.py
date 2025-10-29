@@ -77,7 +77,8 @@ if __name__ == "__main__":
 
     # 저장
     extractor.save_to_csv(
-        rainfall_df, f"{PROJECT_ROOT}/src/data/rainfall/rainfall_daily.csv"
+        rainfall_df,
+        f"{PROJECT_ROOT}/src/data/rainfall/processed_data/rainfall_daily.csv",
     )
 
     print(f"저장 완료: {len(rainfall_df)}개 데이터")
