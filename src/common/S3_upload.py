@@ -90,12 +90,12 @@ def main():
     S3 = boto3.client("s3") # 이전에 사용자 설정을 완료해야 함
     
     # 업로드할 폴더명 
-    FOLDER_NAME = "folder_name"
+    FOLDER_NAME = "wind"
     # 업로드할 파일명
-    FILE_NAME = "file_name"  
+    FILE_NAME = "wind_2024_quarter_daily.csv"  
     
     # S3에서 파일을 업로드할 폴더명
-    TARGET_FOLDER_NAME = "target_file_name" # 업로드 목표 폴더명 
+    TARGET_FOLDER_NAME = "wind" # 업로드 목표 폴더명 
     '''
     예시>>
     FOLDER_NAME = "wind"                     # 업로드할 폴더명 
@@ -130,7 +130,7 @@ def main():
     success = S3_upload(S3, FOLDER_NAME, FILE_NAME, TARGET_FOLDER_NAME)
     if success:
         Check_dir_S3(S3)
-    
+
 
 if __name__ == "__main__":
     main()
