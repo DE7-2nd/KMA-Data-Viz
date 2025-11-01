@@ -1,0 +1,65 @@
+-- SNOWFLAKE 실행환경 준비
+USE ROLE ANALYTICS_AUTHOR;
+USE WAREHOUSE COMPUTE_WH;
+
+"""
+관측지점 및 계절연도 별 계절 일 수 및 비율 산출 VIEW 생성
+칼럼 : 관측지점 / 계절연도 / 봄 일 수 / 여름 일 수/ 가을 일 수/ 겨울 일 수/ 봄 비율 / 여름 비율 / 가을 비율 / 겨울 비율
+"""
+CREATE OR REPLACE VIEW KMA_DB.ANALYTICS.SEASON_DAYS_PIVOT AS
+WITH first_dates AS (
+    SELECT
+        STN_KO,
+        SEASON_YEAR,
+        MAIN_SEASON,
+        MIN(TM) AS FIRST_DATE
+    FROM KMA_DB.RAW_DATA.SEASON_YEARLY
+    WHERE MAIN_SEASON IN ('봄', '여름', '가을', '겨울')
+    GROUP BY STN_KO, SEASON_YEAR, MAIN_SEASON
+),
+-- 가을 = 365 - (봄 + 여름 + 겨울)
+season_days_fixed AS (
+    SELECT
+        STN_KO,
+        SEASON_YEAR,
+        MAIN_SEASON,
+        CASE
+            WHEN MAIN_SEASON = '가을'
+                THEN 365 - (
+                        SUM(CASE WHEN MAIN_SEASON <> '가을' THEN DAYS ELSE 0 END)
+                        OVER (PARTITION BY STN_KO, SEASON_YEAR)
+                    )
+            ELSE DAYS
+        END AS DAYS
+    FROM first_dates
+)
+
+SELECT
+    STN_KO,
+    SEASON_YEAR,
+
+    MAX(CASE WHEN MAIN_SEASON = '봄'   THEN DAYS END) AS SPRING_DAYS,
+    MAX(CASE WHEN MAIN_SEASON = '여름' THEN DAYS END) AS SUMMER_DAYS,
+    MAX(CASE WHEN MAIN_SEASON = '가을' THEN DAYS END) AS AUTUMN_DAYS,
+    MAX(CASE WHEN MAIN_SEASON = '겨울' THEN DAYS END) AS WINTER_DAYS,
+
+    MAX(CASE WHEN MAIN_SEASON = '봄'   THEN ROUND(DAYS / 365, 4) END) AS SPRING_RATIO,
+    MAX(CASE WHEN MAIN_SEASON = '여름' THEN ROUND(DAYS / 365, 4) END) AS SUMMER_RATIO,
+    MAX(CASE WHEN MAIN_SEASON = '가을' THEN ROUND(DAYS / 365, 4) END) AS AUTUMN_RATIO,
+    MAX(CASE WHEN MAIN_SEASON = '겨울' THEN ROUND(DAYS / 365, 4) END) AS WINTER_RATIO
+
+FROM season_days_fixed
+WHERE SEASON_YEAR >= 2010                  -- 2010년 이후 데이터만 제한(4계절이 모두 존재하는 연도)
+GROUP BY STN_KO, SEASON_YEAR
+ORDER BY STN_KO, SEASON_YEAR;
+
+'''
+null 값 존재 컬럼 검증 
+'''
+SELECT *
+FROM KMA_DB.ANALYTICS.SEASON_DAYS_PIVOT
+WHERE SPRING_DAYS IS NULL
+    OR SUMMER_DAYS IS NULL
+    OR AUTUMN_DAYS IS NULL
+    OR WINTER_DAYS IS NULL
+ORDER BY STN_KO, SEASON_YEAR;
