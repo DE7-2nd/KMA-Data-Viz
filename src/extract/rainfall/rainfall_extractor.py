@@ -48,6 +48,7 @@ class RainfallExtractor:
     def process_data(self, df: pd.DataFrame) -> pd.DataFrame:
         """데이터 처리"""
         df_selected = df[self.HEADER_RAINFALL].copy()
+        df_selected["TM"] = pd.to_datetime(df_selected["TM"])
         df_selected["RN_DUR"] = pd.to_numeric(
             df_selected["RN_DUR"], errors="coerce"
         )
