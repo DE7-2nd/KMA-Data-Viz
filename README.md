@@ -17,20 +17,29 @@
 
 **기후 변화가 실제 생활 환경에 미치는 영향**을 정량적으로 분석·시각화함으로써 **사용자가 직관적으로 이해할 수 있는 기상 인사이트를 제공**하는 것을 목표로 합니다.
 
+## 👥 팀원 역할
+
+| 이름              | 역할                                     | 주요 담당 업무                                                                                  |
+| ----------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **박정은 (팀장)** | 데이터 인프라 <br> 데이터 수집 및 시각화 | - S3, Snowflake, Preset 등 데이터 인프라 및 접근 권한 관리<br>- 계절 관측 데이터 수집 및 시각화 |
+| **최혁주**        | 데이터 수집 및 시각화                    | - 풍향 데이터 수집 및 풍향장미도(풍향 시각화) 및 지역별 풍향 정보 시각화                        |
+| **송여름**        | 데이터 분석 및 시각화                    | - 7개 도시의 미세먼지 데이터 수집 및 시각화                                                     |
+| **김지연**        | 데이터 검증 및 시각화                    | - 예보 강수와 실제 강수량 수집 및 정확도 분석 시각화                                            |
+
 ## 🏗️ 프로젝트 아키텍처
 
-원천 데이터 → AWS S3 → Snowflake → Preset 대시보드
-<img width="999" height="400" alt="image" src="https://github.com/user-attachments/assets/6ece9801-db78-4ea3-94aa-f7f7bef85887" />
+- 원천 데이터 → AWS S3 → Snowflake → Preset 대시보드
+  <img width="999" height="400" alt="image" src="https://github.com/user-attachments/assets/6ece9801-db78-4ea3-94aa-f7f7bef85887" />
 
 ### 주요 구성요소
 
 - **AWS S3 + IAM**: 데이터 저장 및 접근 제어
 - **Snowflake**: 데이터웨어하우스 (RAW_DATA, ANALYTICS 스키마)
+
   - raw_data의 스키마
     <img width="1199" height="659" alt="image" src="https://github.com/user-attachments/assets/dc0db6e2-043c-416a-b4a8-7a461a353349" />
- 
-- **Preset**: 시각화 대시보드 도구
 
+- **Preset**: 시각화 대시보드 도구
 
 ## 📁 프로젝트 구조
 
@@ -145,11 +154,10 @@
 - 데이터 특성에 맞는 시각화 도구 선정 기준 확립
 
 ## 프로젝트 시각화 대시보드
+
 <img width="1414" height="759" alt="스크린샷 2025-11-12 오후 5 01 29" src="https://github.com/user-attachments/assets/0fd0b5e9-9655-4585-982a-dbdcbd4af4fe" />
 <img width="1402" height="840" alt="스크린샷 2025-11-12 오후 5 01 58" src="https://github.com/user-attachments/assets/15cadfc7-4a06-486e-892b-ed288451ae7f" />
 <img width="1398" height="799" alt="스크린샷 2025-11-12 오후 5 02 46" src="https://github.com/user-attachments/assets/65a100e6-da70-4545-b18f-3a3fdf2a57ba" />
 <img width="1402" height="572" alt="스크린샷 2025-11-12 오후 5 03 05" src="https://github.com/user-attachments/assets/658ab93f-b4ab-45a2-a639-f695a8e51825" />
 <img width="1394" height="452" alt="스크린샷 2025-11-12 오후 5 03 18" src="https://github.com/user-attachments/assets/a0b58456-7e42-4a6a-a811-6d5008f91673" />
 <img width="1300" alt="스크린샷 2025-11-12 오후 4 59 21" src="https://github.com/user-attachments/assets/d91f40ef-8218-4521-a2d8-7ca6abfa055b" />
-
-
