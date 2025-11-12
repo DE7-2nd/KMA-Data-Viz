@@ -20,12 +20,17 @@
 ## 🏗️ 프로젝트 아키텍처
 
 원천 데이터 → AWS S3 → Snowflake → Preset 대시보드
+<img width="999" height="400" alt="image" src="https://github.com/user-attachments/assets/6ece9801-db78-4ea3-94aa-f7f7bef85887" />
 
 ### 주요 구성요소
 
 - **AWS S3 + IAM**: 데이터 저장 및 접근 제어
 - **Snowflake**: 데이터웨어하우스 (RAW_DATA, ANALYTICS 스키마)
+  - raw_data의 스키마
+    <img width="1199" height="659" alt="image" src="https://github.com/user-attachments/assets/dc0db6e2-043c-416a-b4a8-7a461a353349" />
+ 
 - **Preset**: 시각화 대시보드 도구
+
 
 ## 📁 프로젝트 구조
 
@@ -138,3 +143,13 @@
 - 클라우드 기반 ETL 파이프라인의 전체 흐름 경험
 - 프로젝트 관리 및 협업 도구 사용 (GitHub Project, Issue)
 - 데이터 특성에 맞는 시각화 도구 선정 기준 확립
+
+## 프로젝트 시각화 대시보드
+<img width="1414" height="759" alt="스크린샷 2025-11-12 오후 5 01 29" src="https://github.com/user-attachments/assets/0fd0b5e9-9655-4585-982a-dbdcbd4af4fe" />
+<img width="1402" height="840" alt="스크린샷 2025-11-12 오후 5 01 58" src="https://github.com/user-attachments/assets/15cadfc7-4a06-486e-892b-ed288451ae7f" />
+<img width="1398" height="799" alt="스크린샷 2025-11-12 오후 5 02 46" src="https://github.com/user-attachments/assets/65a100e6-da70-4545-b18f-3a3fdf2a57ba" />
+<img width="1402" height="572" alt="스크린샷 2025-11-12 오후 5 03 05" src="https://github.com/user-attachments/assets/658ab93f-b4ab-45a2-a639-f695a8e51825" />
+<img width="1394" height="452" alt="스크린샷 2025-11-12 오후 5 03 18" src="https://github.com/user-attachments/assets/a0b58456-7e42-4a6a-a811-6d5008f91673" />
+<img width="1300" alt="스크린샷 2025-11-12 오후 4 59 21" src="https://github.com/user-attachments/assets/d91f40ef-8218-4521-a2d8-7ca6abfa055b" />
+
+
